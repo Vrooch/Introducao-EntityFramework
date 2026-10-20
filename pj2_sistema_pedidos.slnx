@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="pj2_sistema_pedidos/pj2_sistema_pedidos.csproj" />
   <Project Path="pratica/pratica.csproj" />
+  <Project Path="pratica2/pratica2.csproj" />
+  <Project Path="pratica3/pratica3.csproj" />
 </Solution>
