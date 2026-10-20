@@ -20,10 +20,7 @@ namespace pj2_sistema_pedidos.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ClienteConfigurations());
-            modelBuilder.ApplyConfiguration(new PedidoConfigurations());
-            modelBuilder.ApplyConfiguration(new ProdutoConfigurations());
-            modelBuilder.ApplyConfiguration(new PedidoItemConfigurations());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationConbtext).Assembly);
         }
     }
 }
