@@ -32,7 +32,7 @@ CREATE TABLE [Produtos] (
 CREATE TABLE [Pedidos] (
     [Id] int NOT NULL IDENTITY,
     [ClienteId] int NOT NULL,
-    [IniciadoEm] datetime2 NOT NULL DEFAULT (GETATE()),
+    [IniciadoEm] datetime2 NOT NULL DEFAULT (GETDATE()),
     [FinalizadoEm] datetime2 NOT NULL,
     [TipoFrete] int NOT NULL,
     [Status] nvarchar(max) NOT NULL,
@@ -60,7 +60,7 @@ CREATE INDEX [IX_PedidoItens_ProdutoId] ON [PedidoItens] ([ProdutoId]);
 CREATE INDEX [IX_Pedidos_ClienteId] ON [Pedidos] ([ClienteId]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20261023231343_primeira_migracao_corrigida_02', N'10.0.13');
+VALUES (N'20261023232217_primeira_migracao_corrigida_3', N'10.0.13');
 
 COMMIT;
 GO

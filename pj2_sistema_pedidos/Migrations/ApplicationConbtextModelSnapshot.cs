@@ -74,7 +74,7 @@ namespace pj2_sistema_pedidos.Migrations
                     b.Property<DateTime>("IniciadoEm")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETATE()");
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Observacao")
                         .IsRequired()

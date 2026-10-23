@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace pj2_sistema_pedidos.Migrations
 {
     /// <inheritdoc />
-    public partial class primeira_migracao_corrigida_02 : Migration
+    public partial class primeira_migracao_corrigida_3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace pj2_sistema_pedidos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    IniciadoEm = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETATE()"),
+                    IniciadoEm = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     FinalizadoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TipoFrete = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),

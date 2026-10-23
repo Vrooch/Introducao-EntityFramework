@@ -11,7 +11,7 @@ namespace pj2_sistema_pedidos
             builder.ToTable("Pedidos");
             builder.HasKey(b => b.Id);
 
-            builder.Property(b => b.IniciadoEm).HasDefaultValueSql("GETATE()").ValueGeneratedOnAdd();
+            builder.Property(b => b.IniciadoEm).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
             builder.Property(b => b.Status).HasConversion<string>();
             builder.Property(b => b.TipoFrete).HasConversion<int>();
             builder.Property(b => b.Observacao).HasColumnType("VARCHAR(512)");

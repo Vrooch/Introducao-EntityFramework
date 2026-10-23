@@ -12,8 +12,8 @@ using pj2_sistema_pedidos.Data;
 namespace pj2_sistema_pedidos.Migrations
 {
     [DbContext(typeof(ApplicationConbtext))]
-    [Migration("20261023231343_primeira_migracao_corrigida_02")]
-    partial class primeira_migracao_corrigida_02
+    [Migration("20261023232217_primeira_migracao_corrigida_3")]
+    partial class primeira_migracao_corrigida_3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,7 @@ namespace pj2_sistema_pedidos.Migrations
                     b.Property<DateTime>("IniciadoEm")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETATE()");
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Observacao")
                         .IsRequired()
