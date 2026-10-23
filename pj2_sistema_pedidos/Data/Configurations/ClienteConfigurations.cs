@@ -13,7 +13,7 @@ namespace pj2_sistema_pedidos.Data.Configurations
             
             builder.Property(b => b.Nome).HasColumnType("VARCHAR(80)").IsRequired();
             builder.Property(b => b.Telefone).HasColumnType("CHAR(11)");
-            builder.Property(b => b.CEP).HasColumnType("CAHR(8)").IsRequired();
+            builder.Property(b => b.CEP).HasColumnType("CHAR(8)").IsRequired();
             builder.Property(b => b.Estado).HasColumnType("CHAR(2)").IsRequired();
             builder.Property(b => b.Cidade).HasMaxLength(60).IsRequired();
             
