@@ -75,3 +75,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 .DS_Store
+
+#Debug
+Debug/

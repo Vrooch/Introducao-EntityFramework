@@ -5,7 +5,7 @@ using pj2_sistema_pedidos.Domain;
 
 namespace pj2_sistema_pedidos.Data
 {
-    internal class ApplicationConbtext : DbContext
+    internal class ApplicationContext : DbContext
     {
         // Expondo as prorpiedades atraves do DbSet;
         public DbSet<Pedido> Pedido {get; set;}
@@ -20,7 +20,7 @@ namespace pj2_sistema_pedidos.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationConbtext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
         }
     }
 }

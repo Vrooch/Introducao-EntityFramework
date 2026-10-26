@@ -10,7 +10,7 @@ using pj2_sistema_pedidos.Data;
 
 namespace pj2_sistema_pedidos.Migrations
 {
-    [DbContext(typeof(ApplicationConbtext))]
+    [DbContext(typeof(ApplicationContext))]
     partial class ApplicationConbtextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

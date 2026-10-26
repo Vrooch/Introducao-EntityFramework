@@ -11,7 +11,7 @@ using pj2_sistema_pedidos.Data;
 
 namespace pj2_sistema_pedidos.Migrations
 {
-    [DbContext(typeof(ApplicationConbtext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20261023232217_primeira_migracao_corrigida_3")]
     partial class primeira_migracao_corrigida_3
     {
