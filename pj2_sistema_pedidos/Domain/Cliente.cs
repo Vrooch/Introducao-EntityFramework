@@ -19,6 +19,6 @@ namespace pj2_sistema_pedidos.Domain
         public string Estado { get; set; }
         public string Cidade { get; set; }
         public string email { get; set; }
-        private string teste {get; set;}
+        public int Idade { get; set; }
     }
 }
