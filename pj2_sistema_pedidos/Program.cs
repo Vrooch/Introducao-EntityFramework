@@ -16,21 +16,61 @@ using (var db = new ApplicationContext())
 }
 
 Console.WriteLine("Criando uma nova entidade de produto");
+InserirProdutosEmMassa();
 
-/*
-var produto = new Produto()
+static void InserirProduto()
 {
-    Descricao = "Carregador",
-    CodigoBarras = "123456789",
-    Valor = 37.50m,
-    TipoProduto = TipoProduto.MercadoriaParaRevenda,
-    Ativo = true
-};
+    var produto = new Produto()
+    {
+        Descricao = "Carregador",
+        CodigoBarras = "123456789",
+        Valor = 37.50m,
+        TipoProduto = TipoProduto.MercadoriaParaRevenda,
+        Ativo = true
+    };
 
-using (var db = new ApplicationContext())
+    using (var db = new ApplicationContext())
+    {
+        db.Produto.Add(produto);
+        var registrosAfetados = db.SaveChanges();
+        Console.WriteLine($"Registros afetados: {registrosAfetados}");
+    };
+}
+static void InserirProdutosEmMassa()
 {
-    db.Produto.Add(produto);
-    var registrosAfetados = db.SaveChanges();
-    Console.WriteLine($"Registros afetados: {registrosAfetados}");
-};
-*/
+    var lista_produtos = new List<Produto>()
+    {
+        new Produto()
+        {
+            Descricao = "teclado",
+            CodigoBarras = "234567890",
+            Valor = 37.50m,
+            TipoProduto = TipoProduto.MercadoriaParaRevenda,
+            Ativo = true
+        },
+        new Produto()
+        {
+            Descricao = "Fone de Ouvido",
+            CodigoBarras = "345678901",
+            Valor = 99.90m,
+            TipoProduto = TipoProduto.MercadoriaParaRevenda,
+            Ativo = true
+        },
+        new Produto()
+        {
+            Descricao = "Cabo USB",
+            CodigoBarras = "456789012",
+            Valor = 19.90m,
+            TipoProduto = TipoProduto.MercadoriaParaRevenda,
+            Ativo = true
+        }
+    };
+
+    using (var db = new ApplicationContext())
+    {
+        db.Produto.AddRange(lista_produtos);
+
+        int registrosAfetados = db.SaveChanges();
+        Console.WriteLine($"Registros afetados: {registrosAfetados}");
+    };
+}
