@@ -12,11 +12,12 @@ using (var db = new ApplicationContext())
         // ao alerta de migrações pendentes.
         Console.WriteLine("Existe migrações pendentes");
     }
-
 }
 
-Console.WriteLine("Criando uma nova entidade de produto");
-InserirProdutosEmMassa();
+foreach(var prod in ConsultarProdutos_sintaxe())
+{
+    Console.WriteLine($"Produto: {prod.Descricao}, valor: {prod.Valor:C}");
+}
 
 static void InserirProduto()
 {
@@ -73,4 +74,43 @@ static void InserirProdutosEmMassa()
         int registrosAfetados = db.SaveChanges();
         Console.WriteLine($"Registros afetados: {registrosAfetados}");
     };
+}
+static List<Produto> ConsultarProdutos_sintaxe()
+{
+    using (var db = new ApplicationContext())
+    {
+        return (from c in db.Produto select c).ToList();
+    }
+}
+
+static List<Produto> ConsultarProdutos_method()
+{
+    using (var db = new ApplicationContext())
+    {
+        return db.Produto.ToList();
+    }
+}
+
+static void AumentarValor()
+{
+    using (var db = new ApplicationContext())
+    {
+        foreach (var produto in db.Produto.ToList())
+        {
+            produto.Valor += 10m;
+        }
+        db.SaveChanges();
+    }
+}
+
+static void AumentarValor_AsNoTracking()
+{
+    using (var db = new ApplicationContext())
+    {
+        foreach (var produto in db.Produto.AsNoTracking().ToList())
+        {
+            produto.Valor += 10m;
+        }
+        db.SaveChanges();
+    }
 }
