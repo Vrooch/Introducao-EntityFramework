@@ -14,9 +14,24 @@ using (var db = new ApplicationContext())
     }
 }
 
-foreach(var prod in ConsultarProdutos_sintaxe())
+//Cadastrar_pedido();
+
+Console.WriteLine("\nVerificando o pedido: ");
+using (var db = new ApplicationContext())
 {
-    Console.WriteLine($"Produto: {prod.Descricao}, valor: {prod.Valor:C}");
+    var pedidos = db.Pedido
+                    .Include(p => p.Itens)
+                        .ThenInclude(item => item.Produto)
+                    .Include(p => p.Cliente)
+                    .ToList();
+
+    Console.WriteLine(pedidos.Count);
+
+}
+
+foreach(var prod in ConsultarProdutos_method())
+{
+    Console.WriteLine($"Produto: {prod.Id}, Descrição: {prod.Descricao}, valor: {prod.Valor:C}");
 }
 
 static void InserirProduto()
@@ -82,7 +97,6 @@ static List<Produto> ConsultarProdutos_sintaxe()
         return (from c in db.Produto select c).ToList();
     }
 }
-
 static List<Produto> ConsultarProdutos_method()
 {
     using (var db = new ApplicationContext())
@@ -90,7 +104,6 @@ static List<Produto> ConsultarProdutos_method()
         return db.Produto.ToList();
     }
 }
-
 static void AumentarValor()
 {
     using (var db = new ApplicationContext())
@@ -102,7 +115,6 @@ static void AumentarValor()
         db.SaveChanges();
     }
 }
-
 static void AumentarValor_AsNoTracking()
 {
     using (var db = new ApplicationContext())
@@ -111,6 +123,66 @@ static void AumentarValor_AsNoTracking()
         {
             produto.Valor += 10m;
         }
+        db.SaveChanges();
+    }
+}
+static void Cadastrar_pedido()
+{
+    /*
+    using (var db = new ApplicationContext())
+    {
+        db.Cliente.Add(new Cliente
+        {
+            Nome = "Andre",
+            Telefone = "00915532445",
+            CEP = "78954652",
+            Estado = "SP",
+            Cidade = "Jundiai"
+        });
+
+        db.SaveChanges();
+    }
+    */
+
+
+    using (var db = new ApplicationContext())
+    {
+        Produto? produto = db.Produto.FirstOrDefault();
+        Produto produto2 = db.Produto.Where(p => p.Id > 10).FirstOrDefault();
+        Cliente cliente = db.Cliente.FirstOrDefault();
+
+        Console.WriteLine(produto.Id);
+        Console.WriteLine(produto2.Id);
+        Console.WriteLine(cliente.Id);
+
+        db.Pedido.Add(new Pedido()
+        {
+            ClienteId = cliente.Id,
+            IniciadoEm = DateTime.Now,
+            FinalizadoEm = DateTime.Now,
+            TipoFrete = TipoFrete.SemFrete,
+            Status = StatusPedido.Finalizado,
+            Observacao = "N/A",
+            Itens = new List<PedidoItem>()
+            {
+                new PedidoItem()
+                {
+                    ProdutoId = produto.Id,
+                    Quantidade = 2,
+                    valor = produto.Valor,
+                    Desconto = 0.0m
+                },
+                new PedidoItem()
+                {
+                    ProdutoId = produto2.Id,
+                    Quantidade = 1,
+                    valor = produto2.Valor,
+                    Desconto = 0.0m
+                }
+
+            }
+        });
+
         db.SaveChanges();
     }
 }
