@@ -14,25 +14,8 @@ using (var db = new ApplicationContext())
     }
 }
 
-//Cadastrar_pedido();
+AlterarDesconectada(2, "Bruno", "RJ");
 
-Console.WriteLine("\nVerificando o pedido: ");
-using (var db = new ApplicationContext())
-{
-    var pedidos = db.Pedido
-                    .Include(p => p.Itens)
-                        .ThenInclude(item => item.Produto)
-                    .Include(p => p.Cliente)
-                    .ToList();
-
-    Console.WriteLine(pedidos.Count);
-
-}
-
-foreach(var prod in ConsultarProdutos_method())
-{
-    Console.WriteLine($"Produto: {prod.Id}, Descrição: {prod.Descricao}, valor: {prod.Valor:C}");
-}
 
 static void InserirProduto()
 {
@@ -186,3 +169,42 @@ static void Cadastrar_pedido()
         db.SaveChanges();
     }
 }
+static void Consultar_Pedidos()
+{
+    Console.WriteLine("\nVerificando o pedido: ");
+    using (var db = new ApplicationContext())
+    {
+        var pedidos = db.Pedido
+                        .Include(p => p.Itens)
+                            .ThenInclude(item => item.Produto)
+                        .Include(p => p.Cliente)
+                        .ToList();
+
+        Console.WriteLine(pedidos.Count);
+
+    }
+}
+static Cliente Cliente_Pelo_Id(int id)
+{
+    using (var db = new ApplicationContext())
+    {
+        return db.Cliente.Find(id);
+    }
+}
+static void AlterarDesconectada(int id, string nome, string estado)
+{
+    Cliente cliente = new Cliente(){Id = id};
+    var clienteAlteracoes = new
+    {
+        Nome = nome,
+        Estado = estado
+    };
+
+    using (var db = new ApplicationContext())
+    {
+        db.Attach(cliente);
+        db.Entry(cliente).CurrentValues.SetValues(clienteAlteracoes);
+        db.SaveChanges();
+    }
+}
+
